@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { POKEMONS } from './api-pokemons';
+import { Pokemon } from './pokemon.models';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +8,15 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
-  pokemonList = ['Bulbizarre', 'Salameche', 'Carapuce'];
+  pokemonList = POKEMONS;
 
   ngOnInit(){
     console.log(this.pokemonList)
-    this.selectPokemon('Salameche')
+    this.selectPokemon(this.pokemonList[1])
   }
 
-  selectPokemon(pokemonName: string): void {
-    console.log(`Vous avez cliqué sur le pokemon ${pokemonName}`);
+  selectPokemon(pokemon: Pokemon): void {
+    console.log(`Vous avez cliqué sur le pokemon ${pokemon.name}`);
   }
 
 }
