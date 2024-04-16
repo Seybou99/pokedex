@@ -3,12 +3,38 @@
 <input #input type="text" placeholder="Saisir le numero d'un pokemon" 
 (keyup.enter)="selectPokemon(input.value)">
 
-<p *ngIf="pokemonSelected">{{ pokemonSelected.name }}</p>
+<div *ngIf="pokemonSelected">
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+            <img [src]="pokemonSelected.picture" class="img-fluid rounded-start" alt="Photo de {{ pokemonSelected.name }}">
+            </div>
+            <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ pokemonSelected.name }}</h5>
+                <p class="card-text"><small class="text-body-secondary">{{ pokemonSelected.created }}</small></p>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <p *ngIf="!pokemonSelected">Aucun pokemons selectionnée</p>
 
-<ul *ngFor="let pokemon of pokemonList">
-    <li>{{ pokemon.name }}</li>
-</ul>
-
-
+<div class="row">
+    <div class="col-md-4 col-xl-3" *ngFor="let pokemon of pokemonList">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img [src]="pokemon.picture" class="img-fluid rounded-start" alt="Photo de {{ pokemon.name }}">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pokemon.name }}</h5>
+                    <p class="card-text"><small class="text-body-secondary">{{ pokemon.created }}</small></p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

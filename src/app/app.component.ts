@@ -5,7 +5,7 @@ import { Pokemon } from './pokemon.models';
 @Component({
   selector: 'app-root',
   templateUrl: `./app.component.html`,
-  styles: []
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   pokemonList = POKEMONS;
@@ -15,10 +15,10 @@ export class AppComponent {
     console.log(this.pokemonList)
   }
 
-  selectPokemon(pokemonId: string): void {
-    const id: number = +pokemonId
+  selectPokemon(PokemonName: string): void {
+    const name: string = PokemonName
 
-    const pokemon:Pokemon|undefined = this.pokemonList.find(pokemon => pokemon.id == id);
+    const pokemon:Pokemon|undefined = this.pokemonList.find(pokemon => pokemon.name == name);
 
     this.pokemonSelected = pokemon
   }
