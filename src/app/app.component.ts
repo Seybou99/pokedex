@@ -4,19 +4,22 @@ import { Pokemon } from './pokemon.models';
 
 @Component({
   selector: 'app-root',
-  template: `Liste de pokemons`,
+  templateUrl: `./app.component.html`,
   styles: []
 })
 export class AppComponent {
   pokemonList = POKEMONS;
+  pokemonSelected: Pokemon|undefined
 
   ngOnInit(){
     console.log(this.pokemonList)
-    this.selectPokemon(this.pokemonList[1])
   }
 
-  selectPokemon(pokemon: Pokemon): void {
-    console.log(`Vous avez cliqué sur le pokemon ${pokemon.name}`);
-  }
+  selectPokemon(pokemonId: string): void {
+    const id: number = +pokemonId
 
+    const pokemon:Pokemon|undefined = this.pokemonList.find(pokemon => pokemon.id == id);
+
+    this.pokemonSelected = pokemon
+  }
 }
