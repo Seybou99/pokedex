@@ -1,4 +1,4 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appBorderCard]'
@@ -10,6 +10,7 @@ export class BorderCardDirective {
     this.setHeight(150);
     this.setBorder("#F5F5F5");
   }
+
 
   setHeight(height: number){
     //this.el est l'element ou se trouve la directive
