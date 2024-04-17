@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { POKEMONS } from './api-pokemons';
-import { Pokemon } from './pokemon.models';
+import { POKEMONS } from './pokemon/api-pokemons';
+import { Pokemon } from './pokemon/pokemon.models';
 
 @Component({
   selector: 'app-root',
