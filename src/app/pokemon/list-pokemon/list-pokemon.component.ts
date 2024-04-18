@@ -16,15 +16,11 @@ export class ListPokemonComponent {
   constructor(private router: Router, public pokemonService: PokemonService) {}
 
   ngOnInit(){
-    this.pokemonList = this.pokemonService.getPokemonList();
+    this.pokemonService.getPokemonList()
+    .subscribe(pokemons => this.pokemonList = pokemons)
   }
 
   selectPokemon(PokemonName: string): void {
-    const name: string = PokemonName
-
-    const pokemon:Pokemon|undefined = this.pokemonList.find(pokemon => pokemon.name == name);
-
-    this.pokemonSelected = pokemon
   }
 
   goToDetail(pokemon: Pokemon){
