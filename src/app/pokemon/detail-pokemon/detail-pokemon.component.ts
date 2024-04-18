@@ -18,7 +18,8 @@ export class DetailPokemonComponent {
     //ActivatedRoute est une classe de Angular qui permet de recuperer toutes les informations a propos de la route actif. Ici, la route est : pokemon/:id, donc avec paramMap.get('id') je recupere l'id passé sur l'url
     const pokemonId: string | null = this.route.snapshot.paramMap.get('id');
     if(pokemonId){
-      this.pokemon = this.pokemonService.getPokemonById(+pokemonId)
+      this.pokemonService.getPokemonById(+pokemonId)
+      .subscribe(pokemon => this.pokemon = pokemon) 
     }
   }
 
