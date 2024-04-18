@@ -15,4 +15,19 @@ export class PokemonService {
   getPokemonById(pokemonId: number): Pokemon | undefined {
     return POKEMONS.find(pokemon => pokemon.id == pokemonId)
   }
+  getTypesList(): string[] {
+    return [
+      'Feu', 
+      'Eau', 
+      'Plante',
+      'Insecte',
+      'Normal',
+      'Vol',
+      'Poison',
+      'Fée',
+      'Psy',
+      'Electrik',
+      'Combat'
+    ]
+  }
 }
