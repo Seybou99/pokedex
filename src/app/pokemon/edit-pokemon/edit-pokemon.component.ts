@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Pokemon } from '../pokemon.models';
+import { PokemonService } from '../pokemon.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-pokemon',
@@ -15,5 +18,12 @@ import { Component } from '@angular/core';
   ]
 })
 export class EditPokemonComponent {
-
+  pokemon: Pokemon|undefined = new Pokemon();
+  constructor(private route: ActivatedRoute, private pokemonService: PokemonService) {}
+  ngOnInit() {
+    const pokemonId: string|null = this.route.snapshot.paramMap.get('id');
+    if(pokemonId) {
+      this.pokemon = this.pokemonService.getPokemonById(+pokemonId)
+    }
+  }
 }
