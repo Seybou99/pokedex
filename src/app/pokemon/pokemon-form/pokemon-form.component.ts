@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Pokemon } from '../pokemon.models';
 import { PokemonService } from '../pokemon.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-form',
@@ -11,7 +12,8 @@ import { PokemonService } from '../pokemon.service';
 export class PokemonFormComponent {
   @Input() pokemon: Pokemon|undefined;
   types: string[] = [];
-  constructor(public pokemonService: PokemonService){}
+
+  constructor(public pokemonService: PokemonService, public router: Router){}
 
   ngOnInit(): void {
     this.types = this.pokemonService.getTypesList()
@@ -39,6 +41,6 @@ export class PokemonFormComponent {
   }
 
   onSubmit() {
-
+    this.router.navigate(['/pokemons'])
   }
 }
