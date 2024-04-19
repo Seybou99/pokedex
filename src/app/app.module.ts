@@ -8,6 +8,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 import { InMemoryDataService } from './in-memory-data.service';
 import { LoginComponent } from './login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({  
   declarations: [ 
@@ -20,6 +21,7 @@ import { LoginComponent } from './login/login.component';
     PokemonModule,
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
