@@ -9,11 +9,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
 import { FormsModule } from '@angular/forms';
 import { EditPokemonComponent } from './edit-pokemon/edit-pokemon.component';
+import { AuthGuard } from '../auth.guard';
 
 const pokemonRoutes: Routes = [
-  { path:'pokemons', component:ListPokemonComponent }, 
-  { path:'pokemon/:id', component:DetailPokemonComponent }, 
-  { path:'edit/pokemon/:id', component:EditPokemonComponent }, 
+  { path:'pokemons', component:ListPokemonComponent, canActivate:[AuthGuard] }, 
+  { path:'pokemon/:id', component:DetailPokemonComponent, canActivate:[AuthGuard] }, 
+  { path:'edit/pokemon/:id', component:EditPokemonComponent, canActivate:[AuthGuard] }, 
 ]
 
 @NgModule({

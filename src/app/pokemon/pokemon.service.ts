@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { POKEMONS } from './api-pokemons';
 import { Pokemon } from './pokemon.models';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of, tap } from 'rxjs';
 
 @Injectable({
@@ -29,13 +29,13 @@ export class PokemonService {
     )
   } 
   /**
- * Récupère un Pokémon spécifique par son identifiant depuis le serveur.
- * @param pokemonId L'identifiant du Pokémon à récupérer.
- * @returns Un Observable (un carton) qui émet un objet Pokémon ou `undefined` si non trouvé.
- * Cette fonction effectue une requête HTTP GET à un point de terminaison API formé en ajoutant l'ID du Pokémon à l'URL.
- * - `tap` est utilisé pour afficher les données du Pokémon récupéré (comme si on ouvrait le carton pour montrer l'objet).
- * - `catchError` est utilisé pour gérer les erreurs lors de la requête. En cas d'erreur, on affiche celle-ci et on renvoie un carton contenant `undefined`.
- */
+   * Récupère un Pokémon spécifique par son identifiant depuis le serveur.
+   * @param pokemonId L'identifiant du Pokémon à récupérer.
+   * @returns Un Observable (un carton) qui émet un objet Pokémon ou `undefined` si non trouvé.
+   * Cette fonction effectue une requête HTTP GET à un point de terminaison API formé en ajoutant l'ID du Pokémon à l'URL.
+   * - `tap` est utilisé pour afficher les données du Pokémon récupéré (comme si on ouvrait le carton pour montrer l'objet).
+   * - `catchError` est utilisé pour gérer les erreurs lors de la requête. En cas d'erreur, on affiche celle-ci et on renvoie un carton contenant `undefined`.
+  */
   getPokemonById(pokemonId: number): Observable<Pokemon|undefined> {
     return this.http.get<Pokemon>(`api/pokemons/${pokemonId}`).pipe(
       tap( (response) => console.table(response) ),
@@ -44,6 +44,21 @@ export class PokemonService {
         return of(undefined);
       })
     )
+  }
+
+  updatePokemon(updatedPokemon: Pokemon): Observable<null|undefined> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
+    }
+
+    return this.http.put<null>(`api/pokemons`, updatedPokemon, httpOptions).pipe(
+      tap( (response) => console.table(response) ),
+      catchError((error) => {
+        console.log(error);
+        return of(undefined);
+      })
+    )
+
   }
 
   getTypesList(): string[] {

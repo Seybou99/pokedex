@@ -41,6 +41,11 @@ export class PokemonFormComponent {
   }
 
   onSubmit() {
-    this.router.navigate(['/pokemons'])
+    if(this.pokemon){
+      this.pokemonService.updatePokemon(this.pokemon)
+      .subscribe(() => {
+        this.router.navigate(['/pokemons']) 
+      })
+    }
   }
 }
