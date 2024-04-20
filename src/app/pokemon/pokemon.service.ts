@@ -60,7 +60,46 @@ export class PokemonService {
     )
 
   }
+  searchPokemonList(term: string): Observable<Pokemon[]> {
+    if (term.length <= 1) {
+      return of([]);
+    }
 
+    return this.http.get<Pokemon[]>(`api/pokemons/?name=${term}`).pipe(
+      tap((response) => this.log(response))
+    );
+  }
+
+  private log(message: any) {
+    console.log(message);
+  }
+  addPokemon(pokemon: Pokemon): Observable<Pokemon | null> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+  
+    return this.http.post<Pokemon>('api/pokemons', pokemon, httpOptions).pipe(
+      tap((response) => console.table(response)),
+      catchError((error) => {
+        console.log(error);
+        return of(null);
+      })
+    );
+  }
+  postPokemon(newPokemon: Pokemon): Observable<null|undefined> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type' : 'application/json'})
+    }
+ 
+    return this.http.post<null>(`api/pokemons`, newPokemon, httpOptions).pipe(
+      tap( (response) => console.table(response) ),
+      catchError((error) => {
+        console.log(error);
+        return of(undefined);
+      })
+    )
+  }
+  
   getTypesList(): string[] {
     return [
       'Feu', 
